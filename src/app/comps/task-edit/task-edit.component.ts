@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-task-edit',
-  imports: [],
+  standalone: true,
+  imports: [RouterModule],
   templateUrl: './task-edit.component.html',
   styleUrl: './task-edit.component.css'
 })

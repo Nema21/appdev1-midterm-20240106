@@ -1,1 +1,29 @@
-<p>task-list works!</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Priority</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks">
+      <td>{{ task.title }}</td>
+      <td>
+        <span [ngClass]="{
+          'badge badge-danger': task.status === 'Pending',
+          'badge badge-warning': task.status === 'In Progress',
+          'badge badge-success': task.status === 'Completed'
+        }">{{ task.status }}</span>
+      </td>
+      <td>{{ task.priority }}</td>
+      <td>
+        <button class="btn btn-info" [routerLink]="['/tasks', task.id, 'info']">View</button>
+        <button class="btn btn-warning" [routerLink]="['/tasks', task.id, 'edit']">Edit</button>
+        <button class="btn btn-danger" (click)="deleteTask(task.id)">Delete</button>
+        <button class="btn btn-primary" (click)="toggleStatus(task)">Toggle Status</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
