@@ -1,61 +1,60 @@
 <div class="container mt-4 p-4 bg-white shadow-sm rounded-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="fw-bold" style="color: #2d6a4f;">🌿 TaskFlow Manager</h2>
-    <button class="btn btn-success px-4" [routerLink]="['/tasks/new']" 
+    <!-- Hide New Task button in clean view -->
+    <button *ngIf="showActions" class="btn btn-success px-4 fw-bold shadow-sm" [routerLink]="['/tasks/new']" 
             style="background-color: #0fbda2; border: none;">
       + New Task
     </button>
   </div>
 
-  <table class="table table-hover align-middle">
-    <thead style="background-color: #e3fef7; color: #1a4d3f;">
-      <tr>
-        <th class="py-3 ps-3">Title</th>
-        <th class="py-3">Status</th>
-        <th class="py-3">Priority</th>
-        <th class="py-3 text-center">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let task of tasks" style="border-bottom: 1px solid #f0fdfa;">
-        <td class="ps-3 fw-medium">{{ task.title }}</td>
-        <td>
-          <!-- Bootstrap 5 Badge Syntax with Minty Sub-colors -->
-          <span class="badge rounded-pill px-3 py-2" [ngClass]="{
-            'bg-danger-subtle text-danger': task.status === 'Pending',
-            'bg-warning-subtle text-dark': task.status === 'In Progress',
-            'bg-success-subtle text-success': task.status === 'Completed'
-          }">{{ task.status }}</span>
-        </td>
-        <td>
-          <span class="text-muted small fw-bold text-uppercase">{{ task.priority }}</span>
-        </td>
-        <td class="text-center">
-          <div class="btn-group gap-2">
-            <!-- View: Mint Green -->
-            <button class="btn btn-sm text-white rounded-2 px-3" 
-                    style="background-color: #0fbda2; border: none;"
-                    [routerLink]="['/tasks', task.id, 'info']">View</button>
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead style="background-color: #e3fef7; color: #1a4d3f;">
+        <tr>
+          <th class="py-3 ps-3">Title</th>
+          <th class="py-3">Status</th>
+          <th class="py-3">Priority</th>
+          <!-- Hide Header Action Column -->
+          <th *ngIf="showActions" class="py-3 text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let task of tasks" style="border-bottom: 1px solid #f0fdfa;">
+          <td class="ps-3 fw-medium">{{ task.title }}</td>
+          <td>
+            <span class="badge rounded-pill px-3 py-2" [ngClass]="{
+              'bg-danger-subtle text-danger': task.status === 'Pending',
+              'bg-warning-subtle text-dark': task.status === 'In Progress',
+              'bg-success-subtle text-success': task.status === 'Completed'
+            }">{{ task.status }}</span>
+          </td>
+          <td>
+            <span class="text-muted small fw-bold text-uppercase">{{ task.priority }}</span>
+          </td>
+          <!-- Hide Action Buttons Row -->
+          <td *ngIf="showActions" class="text-center">
+            <div class="btn-group gap-2">
+              <button class="btn btn-sm text-white rounded-2 px-3 fw-bold shadow-sm" 
+                      style="background-color: #0fbda2; border: none;"
+                      [routerLink]="['/tasks', task.id, 'info']">View</button>
+              
+              <button class="btn btn-sm btn-outline-success rounded-2 px-3" 
+                      [routerLink]="['/tasks', task.id, 'edit']">Edit</button>
             
-            <!-- Edit: Soft Sage -->
-            <button class="btn btn-sm btn-outline-success rounded-2 px-3" 
-                    [routerLink]="['/tasks', task.id, 'edit']">Edit</button>
-            
-            <!-- Delete: Soft Red -->
-            <button class="btn btn-sm btn-outline-danger rounded-2 px-3" 
-                    (click)="deleteTask(task.id)">Delete</button>
-            
-            <!-- Toggle: Dark Slate -->
-            <button class="btn btn-sm btn-dark rounded-2 px-3" 
-                    (click)="toggleStatus(task)">Toggle Status</button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+              <button class="btn btn-sm btn-outline-danger rounded-2 px-3" 
+                      (click)="deleteTask(task.id)">Delete</button>
+              
+              <button class="btn btn-sm btn-dark rounded-2 px-3" 
+                      (click)="toggleStatus(task)">Status</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-  <!-- Empty State if no tasks exist -->
   <div *ngIf="tasks.length === 0" class="text-center py-5">
-    <p class="text-muted italic">No tasks found. Start by adding a new one!</p>
+    <p class="text-muted fst-italic">No tasks found. Start by adding a new one!</p>
   </div>
 </div>

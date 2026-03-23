@@ -1,33 +1,43 @@
-<div class="container mt-4">
-  <div class="card shadow">
-    <div class="card-header bg-primary text-white">
-      <h3 class="mb-0">Add New Task</h3>
+<div class="container mt-5">
+  <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+    
+    <!-- Header: Seafoam/Mint Theme -->
+    <div class="card-header border-0 py-3" style="background-color: #e3fef7;">
+      <h3 class="mb-0 fw-bold" style="color: #2d6a4f;">🌿 Add New Task</h3>
     </div>
-    <div class="card-body">
-      <form (ngSubmit)="onSubmit()">
+    
+    <div class="card-body p-4 bg-white">
+      <form #addForm="ngForm" (ngSubmit)="onSubmit()">
         
         <!-- Task Title -->
-        <div class="mb-3">
-          <label class="form-label fw-bold">Task Title</label>
-          <input type="text" name="title" [(ngModel)]="task.title" class="form-control" required>
+        <div class="mb-4">
+          <label class="form-label fw-bold text-muted small text-uppercase">Task Title</label>
+          <input type="text" name="title" [(ngModel)]="task.title" 
+                 class="form-control border-success-subtle shadow-none" 
+                 placeholder="What needs to be done?" required>
         </div>
 
         <!-- Task Description -->
-        <div class="mb-3">
-          <label class="form-label fw-bold">Description</label>
-          <textarea name="description" [(ngModel)]="task.description" class="form-control" rows="3"></textarea>
+        <div class="mb-4">
+          <label class="form-label fw-bold text-muted small text-uppercase">Description</label>
+          <textarea name="description" [(ngModel)]="task.description" 
+                    class="form-control border-success-subtle shadow-none" 
+                    placeholder="Add more details here..." rows="3"></textarea>
         </div>
 
-        <div class="row">
+        <div class="row g-4">
+          <!-- Due Date -->
           <div class="col-md-6 mb-3">
-            <label class="form-label fw-bold">Due Date</label>
-            <input type="date" name="dueDate" [(ngModel)]="task.dueDate" class="form-control" required>
+            <label class="form-label fw-bold text-muted small text-uppercase">Due Date</label>
+            <input type="date" name="dueDate" [(ngModel)]="task.dueDate" 
+                   class="form-control border-success-subtle shadow-none" required>
           </div>
 
-          <!-- Priority -->
+          <!-- Priority Level -->
           <div class="col-md-6 mb-3">
-            <label class="form-label fw-bold">Priority</label>
-            <select name="priority" [(ngModel)]="task.priority" class="form-select">
+            <label class="form-label fw-bold text-muted small text-uppercase">Priority</label>
+            <select name="priority" [(ngModel)]="task.priority" 
+                    class="form-select border-success-subtle shadow-none">
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
               <option value="High">High</option>
@@ -35,10 +45,18 @@
           </div>
         </div>
 
-        <!-- Submit Button -->
-        <div class="mt-3">
-          <button type="submit" class="btn btn-success px-4 me-2">Save Task</button>
-          <button type="button" class="btn btn-secondary px-4" (click)="router.navigate(['/tasks'])">Cancel</button>
+        <!-- Submit Button: Minty Sage Theme -->
+        <div class="mt-4 pt-2 d-flex gap-2">
+          <button type="submit" class="btn px-4 fw-bold shadow-sm text-white" 
+                  style="background-color: #0fbda2; border: none;">
+            Save Task
+          </button>
+          
+          <button type="button" class="btn btn-secondary px-4 text-white" 
+                  style="background-color: #6c757d; border: none;"
+                  (click)="router.navigate(['/tasks'])">
+            Cancel
+          </button>
         </div>
 
       </form>

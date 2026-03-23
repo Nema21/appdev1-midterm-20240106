@@ -1,1 +1,41 @@
-<p>task-info works!</p>
+<div *ngIf="task; else noTask" class="mt-3">
+  <div class="row g-4">
+    <!-- Task Details Column -->
+    <div class="col-md-8">
+      <h5 class="text-muted small text-uppercase fw-bold ls-1">Description</h5>
+      <p class="lead text-dark">{{ task.description || 'No description provided.' }}</p>
+      
+      <hr class="my-4" style="border-color: #e3fef7;">
+      
+      <div class="row">
+        <div class="col-6">
+          <h5 class="text-muted small text-uppercase fw-bold ls-1">Due Date</h5>
+          <p class="fw-medium"><i class="bi bi-calendar-event me-2"></i>{{ task.dueDate }}</p>
+        </div>
+        <div class="col-6">
+          <h5 class="text-muted small text-uppercase fw-bold ls-1">Priority</h5>
+          <p><span class="badge rounded-pill bg-dark px-3">{{ task.priority }}</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Status Column -->
+    <div class="col-md-4 text-center border-start border-light">
+      <h5 class="text-muted small text-uppercase fw-bold ls-1 mb-3">Current Status</h5>
+      <div class="py-3 px-4 rounded-4 d-inline-block" 
+           [ngClass]="{
+             'bg-danger-subtle text-danger': task.status === 'Pending',
+             'bg-warning-subtle text-dark': task.status === 'In Progress',
+             'bg-success-subtle text-success': task.status === 'Completed'
+           }">
+        <h4 class="mb-0 fw-bold">{{ task.status }}</h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noTask>
+  <div class="text-center py-5">
+    <p class="text-muted italic">Select a valid task to view information.</p>
+  </div>
+</ng-template>

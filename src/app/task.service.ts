@@ -39,8 +39,18 @@ getTaskById(id: number): Task | undefined {
     return of();
   }
 
-  toggleStatus(task: Task): Observable<Task> {
-    task.status = task.status === 'Completed' ? 'Pending' : 'Completed';
-    return this.updateTask(task);
+
+toggleStatus(id: number): void {
+  const task = this.tasks.find(t => t.id === id);
+  if (task) {
+    if (task.status === 'Pending') {
+      task.status = 'In Progress';
+    } else if (task.status === 'In Progress') {
+      task.status = 'Completed';
+    } else {
+      task.status = 'Pending';
+    }
   }
+}
+
 }

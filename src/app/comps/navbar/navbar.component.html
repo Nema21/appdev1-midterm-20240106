@@ -1,8 +1,10 @@
 <nav class="navbar navbar-expand-lg border-bottom shadow-sm" style="background-color: #e3fef7;">
   <div class="container">
-    <a class="navbar-brand fw-bold text-success" routerLink="/">🌿 TaskFlow</a>
-    <div class="navbar-nav">
-      <a class="nav-link" routerLink="/tasks" routerLinkActive="text-success fw-bold">Task List</a>
+    <a class="navbar-brand fw-bold" style="color: #2d6a4f;" routerLink="/">🌿 TaskFlow</a>
+    
+    <div class="navbar-nav ms-auto gap-2">
+        <a class="nav-link px-3 fw-bold" routerLink="/tasks" [queryParams]="{view: 'clean'}" routerLinkActive="bg-white rounded-pill shadow-sm">Task List</a>
+        <a class="nav-link px-3 fw-bold" routerLink="/tasks" [queryParams]="{view: 'full'}" routerLinkActive="bg-white rounded-pill shadow-sm">Task Info</a>
     </div>
   </div>
 </nav>

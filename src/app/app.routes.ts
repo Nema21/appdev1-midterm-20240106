@@ -7,8 +7,11 @@ import { TaskEditComponent } from './comps/task-edit/task-edit.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'tasks', pathMatch: 'full' },
+  
   { path: 'tasks', component: TaskListComponent },
-  { path: 'tasks/new', component: TaskAddComponent }, 
+  
+  { path: 'tasks/new', component: TaskAddComponent },
+  
   { 
     path: 'tasks/:id', 
     component: TaskDetailComponent,
@@ -18,5 +21,6 @@ export const routes: Routes = [
       { path: '', redirectTo: 'info', pathMatch: 'full' }
     ]
   },
-  { path: '**', redirectTo: 'tasks' } 
+  
+  { path: '**', redirectTo: 'tasks' }
 ];
