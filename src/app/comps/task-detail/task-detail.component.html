@@ -1,39 +1,45 @@
 <div class="container mt-5" *ngIf="task; else noTask">
-  <div class="card shadow-sm">
-    <div class="card-header bg-primary text-white">
-      <h3 class="mb-0">Edit Task Details</h3>
+  <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+    
+    <!-- Header: Mint/Seafoam Theme -->
+    <div class="card-header border-0 py-3" style="background-color: #e3fef7;">
+      <h3 class="mb-0 fw-bold" style="color: #2d6a4f;">🌿 Edit Task Details</h3>
     </div>
-    <div class="card-body">
+    
+    <div class="card-body p-4 bg-white">
       <form #taskForm="ngForm">
-        <div class="row g-3">
+        <div class="row g-4">
           <!-- ID Field (Readonly as per requirement) -->
           <div class="col-md-2">
-            <label class="form-label fw-bold">ID</label>
-            <input type="text" [value]="task.id" class="form-control bg-light" readonly>
+            <label class="form-label fw-bold text-muted small text-uppercase">ID</label>
+            <input type="text" [value]="task.id" class="form-control bg-light border-0" readonly>
           </div>
 
           <!-- Title Field -->
           <div class="col-md-10">
-            <label class="form-label fw-bold">Task Title</label>
-            <input type="text" name="title" [(ngModel)]="task.title" class="form-control" required>
+            <label class="form-label fw-bold text-muted small text-uppercase">Task Title</label>
+            <input type="text" name="title" [(ngModel)]="task.title" 
+                   class="form-control border-success-subtle" required>
           </div>
 
           <!-- Description Field -->
           <div class="col-12">
-            <label class="form-label fw-bold">Description</label>
-            <textarea name="description" [(ngModel)]="task.description" class="form-control" rows="3"></textarea>
+            <label class="form-label fw-bold text-muted small text-uppercase">Description</label>
+            <textarea name="description" [(ngModel)]="task.description" 
+                      class="form-control border-success-subtle" rows="3"></textarea>
           </div>
 
           <!-- Due Date -->
           <div class="col-md-4">
-            <label class="form-label fw-bold">Due Date</label>
-            <input type="date" name="dueDate" [(ngModel)]="task.dueDate" class="form-control">
+            <label class="form-label fw-bold text-muted small text-uppercase">Due Date</label>
+            <input type="date" name="dueDate" [(ngModel)]="task.dueDate" 
+                   class="form-control border-success-subtle">
           </div>
 
           <!-- Status Dropdown (Union Type) -->
           <div class="col-md-4">
-            <label class="form-label fw-bold">Status</label>
-            <select name="status" [(ngModel)]="task.status" class="form-select">
+            <label class="form-label fw-bold text-muted small text-uppercase">Status</label>
+            <select name="status" [(ngModel)]="task.status" class="form-select border-success-subtle">
               <option value="Pending">Pending</option>
               <option value="In Progress">In Progress</option>
               <option value="Completed">Completed</option>
@@ -42,8 +48,8 @@
 
           <!-- Priority Dropdown (Union Type) -->
           <div class="col-md-4">
-            <label class="form-label fw-bold">Priority Level</label>
-            <select name="priority" [(ngModel)]="task.priority" class="form-select">
+            <label class="form-label fw-bold text-muted small text-uppercase">Priority Level</label>
+            <select name="priority" [(ngModel)]="task.priority" class="form-select border-success-subtle">
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
               <option value="High">High</option>
@@ -51,12 +57,16 @@
           </div>
         </div>
 
-        <!-- Action Buttons -->
-        <div class="mt-4 border-top pt-3 d-flex gap-2">
-          <button type="button" class="btn btn-success px-4" (click)="onSave()">
+        <!-- Action Buttons: Mint Theme -->
+        <div class="mt-5 border-top pt-4 d-flex gap-2">
+          <button type="button" class="btn px-4 fw-bold shadow-sm text-white" 
+                  style="background-color: #0fbda2; border: none;"
+                  (click)="onSave()">
             Save Changes
           </button>
-          <button type="button" class="btn btn-outline-secondary px-4" (click)="onBack()">
+          <button type="button" class="btn btn-outline-success px-4" 
+                  style="border-color: #0fbda2; color: #2d6a4f;"
+                  (click)="onBack()">
             Back to List
           </button>
         </div>
@@ -67,11 +77,13 @@
 
 <!-- Template if Task ID is not found -->
 <ng-template #noTask>
-  <div class="container mt-5">
-    <div class="alert alert-danger">
-      <h4>Task Not Found</h4>
-      <p>The task with the specified ID does not exist.</p>
-      <button class="btn btn-danger" (click)="onBack()">Go Back</button>
+  <div class="container mt-5 text-center">
+    <div class="alert border-0 shadow-sm rounded-4 py-5" style="background-color: #fdf2f2;">
+      <h4 class="fw-bold text-danger">Task Not Found</h4>
+      <p class="text-muted">The task with the specified ID does not exist in our system.</p>
+      <button class="btn btn-danger px-5 mt-3 rounded-pill" (click)="onBack()">
+        Go Back to List
+      </button>
     </div>
   </div>
 </ng-template>
