@@ -7,19 +7,19 @@ import { Task } from './task.model';
 })
 export class TaskService {
   private tasks: Task[] = [
-    { id: 1, title: 'Task 1', description: 'Description 1', dueDate: new Date(), status: 'Pending', priority: 'High' },
-    { id: 2, title: 'Task 2', description: 'Description 2', dueDate: new Date(), status: 'In Progress', priority: 'Medium' },
-    { id: 3, title: 'Task 3', description: 'Description 3', dueDate: new Date(), status: 'Completed', priority: 'Low' }
+    { id: 1, title: 'Task 1', description: 'Description 1', dueDate: '', status: 'Pending', priority: 'High' },
+    { id: 2, title: 'Task 2', description: 'Description 2', dueDate: '', status: 'In Progress', priority: 'Medium' },
+    { id: 3, title: 'Task 3', description: 'Description 3', dueDate: '', status: 'Completed', priority: 'Low' }
   ];
 
   getTasks(): Observable<Task[]> {
     return of(this.tasks);
   }
 
-  getTask(id: number): Observable<Task> {
-    const task = this.tasks.find(task => task.id === id);
-    return of(task!);
-  }
+getTaskById(id: number): Task | undefined {
+  return this.tasks.find(t => t.id === id);
+}
+
 
   addTask(task: Task): Observable<Task> {
     this.tasks.push(task);

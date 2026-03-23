@@ -1,1 +1,77 @@
-<p>task-detail works!</p>
+<div class="container mt-5" *ngIf="task; else noTask">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Edit Task Details</h3>
+    </div>
+    <div class="card-body">
+      <form #taskForm="ngForm">
+        <div class="row g-3">
+          <!-- ID Field (Readonly as per requirement) -->
+          <div class="col-md-2">
+            <label class="form-label fw-bold">ID</label>
+            <input type="text" [value]="task.id" class="form-control bg-light" readonly>
+          </div>
+
+          <!-- Title Field -->
+          <div class="col-md-10">
+            <label class="form-label fw-bold">Task Title</label>
+            <input type="text" name="title" [(ngModel)]="task.title" class="form-control" required>
+          </div>
+
+          <!-- Description Field -->
+          <div class="col-12">
+            <label class="form-label fw-bold">Description</label>
+            <textarea name="description" [(ngModel)]="task.description" class="form-control" rows="3"></textarea>
+          </div>
+
+          <!-- Due Date -->
+          <div class="col-md-4">
+            <label class="form-label fw-bold">Due Date</label>
+            <input type="date" name="dueDate" [(ngModel)]="task.dueDate" class="form-control">
+          </div>
+
+          <!-- Status Dropdown (Union Type) -->
+          <div class="col-md-4">
+            <label class="form-label fw-bold">Status</label>
+            <select name="status" [(ngModel)]="task.status" class="form-select">
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+
+          <!-- Priority Dropdown (Union Type) -->
+          <div class="col-md-4">
+            <label class="form-label fw-bold">Priority Level</label>
+            <select name="priority" [(ngModel)]="task.priority" class="form-select">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mt-4 border-top pt-3 d-flex gap-2">
+          <button type="button" class="btn btn-success px-4" (click)="onSave()">
+            Save Changes
+          </button>
+          <button type="button" class="btn btn-outline-secondary px-4" (click)="onBack()">
+            Back to List
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Template if Task ID is not found -->
+<ng-template #noTask>
+  <div class="container mt-5">
+    <div class="alert alert-danger">
+      <h4>Task Not Found</h4>
+      <p>The task with the specified ID does not exist.</p>
+      <button class="btn btn-danger" (click)="onBack()">Go Back</button>
+    </div>
+  </div>
+</ng-template>
